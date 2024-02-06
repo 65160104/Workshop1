@@ -236,6 +236,21 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item" id="logout">
+                            <a href="#" class="nav-link" onclick="openPopup()">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                        <style>
+                            #logout{
+                                position: fixed; /* กำหนดให้ติดตั้งที่ตำแหน่งที่ตั้งในหน้าจอ */
+                                bottom: 0; /* กำหนดให้ตำแหน่งที่ตำแหน่งท้ายสุด (ล่างสุด) */
+                                text-align: center; /* จัดตำแหน่งข้อความกลาง */
+                            }
+                        </style>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -245,6 +260,79 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <div id="confirmationPopup" style="display: none;" class="popup">
+                <p> <b>คุณแน่ใจหรือไม่ที่ต้องการออกจากระบบ ?</b></p>
+                <div class="button-container">
+                    <button class="submid" onclick="confirmAction()">ยืนยัน</button>
+                    <button class="cancel" onclick="closePopup()">ยกเลิก</button>
+                </div>
+            </div>
+
+            <script>
+                function openPopup() {
+                    document.getElementById('confirmationPopup').style.display = 'block';
+                }
+
+                function closePopup() {
+                    document.getElementById('confirmationPopup').style.display = 'none';
+                }
+
+                function confirmAction() {
+                    // กระทำที่คุณต้องการเมื่อผู้ใช้คลิกยืนยัน
+
+                    window.location.href = '/login';
+
+                    alert('Action Confirmed!');
+                    // ปิดป็อปอัพ
+                    closePopup();
+                }
+            </script>
+
+            <style>
+                /* ตำแหน่งป็อปอัพกลางหน้าจอ */
+                #confirmationPopup {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    display: none;
+                    background-color: #fff;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    z-index: 9999; /* ให้มีลำดับแสดงที่สูงกว่าเนื้อหาหลัก */
+                    text-align: center; /* จัดให้ข้อความและปุ่มอยู่ตรงกลาง */
+                }
+
+                /* ปรับแต่งสไตล์ของป็อปอัพตามต้องการ */
+                #confirmationPopup p {
+                    margin-bottom: 10px;
+                }
+
+                .button-container {
+                    margin-top: 20px;
+                }
+
+                #confirmationPopup button {
+                    color: #fff;
+                    padding: 8px 15px;
+                    border: black;
+                    border-radius: 3%;
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
+
+                    /* ปุ่มยืนยันสีเขียว */
+                #confirmationPopup button.submid {
+                    background-color: #28a745;
+                    color: #fff;
+                }
+
+                /* ปุ่มยกเลิกสีแดง */
+                #confirmationPopup button.cancel {
+                    background-color: #dc3545;
+                    color: #fff;
+                }
+            </style>
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
