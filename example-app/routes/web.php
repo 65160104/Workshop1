@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::get('/my-controller', [MyController::class, 'index']);
+//Route::get('/my-controller', [MyController::class, 'index']);
 
 Route::get('/my-controller2', 'App\Http\Controllers\MyController@index');
 Route::namespace('App\Http\Controllers')->group(function(){
@@ -39,7 +39,7 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::post('/my-controller3-post', 'MyController@store');
 });
 
-Route::resource('/my-controller4', MyController::class);
+//Route::resource('/my-controller4', MyController::class);
 
 
 Route::get('/', function () {
@@ -60,4 +60,8 @@ Route::get('/my-route', function(){
 Route::post('/my-route', function(Request $req){
     $data['myinput'] =  $req->input('myinput');
     return view('myroute', $data);
+});
+
+Route::get('/multi', function () {
+    return view('multi'); // welcome.blade.php
 });
